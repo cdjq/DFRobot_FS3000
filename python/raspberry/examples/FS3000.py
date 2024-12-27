@@ -18,7 +18,7 @@ import time
 
 from DFRobot_FS3000 import *
 
-fs = DFRobot_FS3000
+fs = DFRobot_FS3000()
 
 def setup():
   #初始化FS3000_1005

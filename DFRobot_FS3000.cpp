@@ -33,14 +33,14 @@ uint8_t DFRobot_FS3000::setRange(uint8_t range)
     
     if(_range == AIRFLOW_RANGE_7_MPS)
     {
-        memcpy(_mpsDataPoint,mpsDataPoint_7_mps,_range);
-        memcpy(_rawDataPoint,rawDataPoint_7_mps,_range);
+        memcpy(_mpsDataPoint,mpsDataPoint_7_mps,sizeof(float) * _range);
+        memcpy(_rawDataPoint,rawDataPoint_7_mps,sizeof(int) * _range);
     }
 
     if(_range == AIRFLOW_RANGE_15_MPS)
     {
-        memcpy(_mpsDataPoint,mpsDataPoint_15_mps,_range);
-        memcpy(_rawDataPoint,rawDataPoint_15_mps,_range);
+        memcpy(_mpsDataPoint,mpsDataPoint_15_mps,sizeof(float) * _range);
+        memcpy(_rawDataPoint,rawDataPoint_15_mps,sizeof(float) * _range);
     }
 
     return 1;
@@ -94,7 +94,6 @@ float DFRobot_FS3000::readMeterPerSec(void)
     int diff = (airflowRaw - _rawDataPoint[data_position]);
     float percentage_of_window = ((float)diff / (float)window_size);
     float window_size_mps = (_mpsDataPoint[data_position+1] - _mpsDataPoint[data_position]);
-
     airflowMps = _mpsDataPoint[data_position] + (window_size_mps*percentage_of_window);
 
     return airflowMps;
@@ -125,13 +124,11 @@ bool DFRobot_FS3000::checkSum(void* buf)
     uint8_t* _buf = (uint8_t*)buf;
     uint16_t sum = 0;
 
-    for(uint8_t i = 1; i < 5; i++){
+    for(uint8_t i = 0; i < 5; i++){
         sum += _buf[i];
     }
 
-    sum &= 0xff;
-
-    if((sum & _buf[0]) == 0){
+    if((sum  & 0xff)== 0){
         DBG("check sum ok");
         return true;
     }

@@ -15,7 +15,7 @@ import smbus
 AIRFLOW_RANGE_7_MPS = 9
 AIRFLOW_RANGE_15_MPS = 13
 
-class DFRobot_FS3000():
+class DFRobot_FS3000:
 
     def __init__(self):
         self._addr = 0x28
@@ -38,8 +38,8 @@ class DFRobot_FS3000():
         self._range = range
         
         if self._range == AIRFLOW_RANGE_7_MPS:
-            self._mpsDataPoint = self.mpsDataPoint_7_mps.copy()
-            self._rawDataPoint = self.rawDataPoint_7_mps.copy()
+            self._mpsDataPoint = list(self.mpsDataPoint_7_mps)#self.mpsDataPoint_7_mps.copy()
+            self._rawDataPoint = list(self.rawDataPoint_7_mps)#self.rawDataPoint_7_mps.copy()
         elif self._range == AIRFLOW_RANGE_15_MPS:
             self._mpsDataPoint = self.mpsDataPoint_15_mps.copy()
             self._rawDataPoint = self.rawDataPoint_15_mps.copy()
