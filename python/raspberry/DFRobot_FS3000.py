@@ -10,7 +10,8 @@
     @url         https://github.com/DFRobot/DFRobot_FS3000
 '''
 import time
-import smbus
+import smbus2
+from smbus2 import i2c_msg
 
 AIRFLOW_RANGE_7_MPS = 9
 AIRFLOW_RANGE_15_MPS = 13
@@ -19,7 +20,7 @@ class DFRobot_FS3000:
 
     def __init__(self):
         self._addr = 0x28
-        self.i2c = smbus.SMBus(1)
+        self.i2c = smbus2.SMBus(1)
         self._range = 0
         self._mpsDataPoint = [0] *14
         self._rawDataPoint = [0] *14
@@ -41,8 +42,8 @@ class DFRobot_FS3000:
             self._mpsDataPoint = list(self.mpsDataPoint_7_mps)#self.mpsDataPoint_7_mps.copy()
             self._rawDataPoint = list(self.rawDataPoint_7_mps)#self.rawDataPoint_7_mps.copy()
         elif self._range == AIRFLOW_RANGE_15_MPS:
-            self._mpsDataPoint = self.mpsDataPoint_15_mps.copy()
-            self._rawDataPoint = self.rawDataPoint_15_mps.copy()
+            self._mpsDataPoint = list(self.mpsDataPoint_15_mps)#self.mpsDataPoint_15_mps.copy()
+            self._rawDataPoint = list(self.rawDataPoint_15_mps)#self.rawDataPoint_15_mps.copy()
 
     def read_raw(self):
         '''
@@ -59,8 +60,8 @@ class DFRobot_FS3000:
     def read_meter_per_sec(self):
         '''
         @fn read_meter_per_sec
-        @brief 获取米/秒为单位的空气流速
-        @return 空气流速数据
+        @brief 获取秒为单位的空气流速
+        @return 空气流速
         '''
         self.data_position = 0
         self.air_flow_raw = self.read_raw()
@@ -79,7 +80,7 @@ class DFRobot_FS3000:
 
         self.window_size = self._rawDataPoint[self.data_position+1] - self._rawDataPoint[self.data_position]
         self.diff = self.air_flow_raw  - self._rawDataPoint[self.data_position]
-        self.percentage_of_window = (float)self.diff / (float)self.window_size
+        self.percentage_of_window = float(self.diff) / float(self.window_size)
         self.window_size_mps = self._mpsDataPoint[self.data_position+1] - self._mpsDataPoint[self.data_position]
 
         self.air_flow_mps = self._mpsDataPoint[self.data_position] + (self.window_size_mps * self.percentage_of_window)
@@ -89,28 +90,26 @@ class DFRobot_FS3000:
     def read_mile_per_hour(self):
         '''
         @fn read_meter_per_sec
-        @brief 获取英里/小时为单位的空气流速
-        @return 空气流速数据
+        @brief 获取英里/小时为单位的空气流
+        @return 空气流速数
         '''
         return self.read_meter_per_sec() * 2.2369362912
 
 
     def _check_sum(self,buf):
         self.sum = 0
-        for i in range(1, 5):
-            sum += buf[i]
-        self.sum &= 0xff
-        if (self.sum & buf[0]) == 0:
+        for i in range(0, 5):
+            self.sum += buf[i]
+        if (self.sum & 0xff) == 0:
             return True
         return False
 
-
+    def i2c_read_without_refister(self,address, len):
+      read_msg = i2c_msg.read(address,len)
+      self.i2c.i2c_rdwr(read_msg)
+      return list(read_msg)
 
     def _read_data(self):
-        rslt = [0]*5
-        for i in range(5):
-            try:
-                rslt[i] = self._bus.read_byte(self._addr)
-            except:
-                rslt[i] = 0
+        rslt = self.i2c_read_without_refister(self._addr, 5)
+        time.sleep(0.1)
         return rslt
