@@ -10,7 +10,7 @@ DFRobot_FS3000
 
 ## 产品链接（https://www.dfrobot.com）
 
-    SKU：SEN0500/SEN0501
+    SKU：NULL
   
 ## 目录
 

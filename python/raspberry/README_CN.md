@@ -33,37 +33,35 @@ DFRobot_FS3000
 python FS3000.py
 ```
 
-
-
 ## 方法
 
 ```python
     def set_range(self, range):
         '''
-        @fn set_range
-        @brief 设置空气流速检测距离
-        @range AIRFLOW_RANGE_7_MPS:FS3000_1005 AIRFLOW_RANGE_15MPS:FS3000_1015
+            @fn set_range
+            @brief 设置空气流速检测距离
+            @range AIRFLOW_RANGE_7_MPS:FS3000_1005 AIRFLOW_RANGE_15MPS:FS3000_1015
         '''
 
     def read_raw(self):
         '''
-        @fn read_raw
-        @brief 获取传感器得原始数据
-        @return FS3000 寄存器原始数据
+            @fn read_raw
+            @brief 获取传感器得原始数据
+            @return FS3000 寄存器原始数据
         '''
     
     def read_meter_per_sec(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取米/秒为单位的空气流速
-        @return 空气流速数据
+            @fn read_meter_per_sec
+            @brief 获取米/秒为单位的空气流速
+            @return 空气流速数据
         '''
     
     def read_mile_per_hour(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取英里/小时为单位的空气流速
-        @return 空气流速数据
+            @fn read_mile_per_hour
+            @brief 获取英里/小时为单位的空气流速
+            @return 空气流速数据
         '''
 ```
 

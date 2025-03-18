@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 '''!
     @file        DFRobot_FS3000.py
-    @brief       这是空气流速模块驱动库.
+    @brief       This is the air velocity module driver library.
     @copyright   Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
     @license     The MIT License (MIT)
     @author      TangJie(jie.tang@dfrobot.com)
@@ -22,8 +22,8 @@ class DFRobot_FS3000:
         self._addr = 0x28
         self.i2c = smbus2.SMBus(1)
         self._range = 0
-        self._mpsDataPoint = [0] *14
-        self._rawDataPoint = [0] *14
+        self._mpsDataPoint = [0] * 14
+        self._rawDataPoint = [0] * 14
         self.mpsDataPoint_7_mps = [0, 1.07, 2.01, 3.00, 3.97, 4.96, 5.98, 6.99, 7.23]
         self.rawDataPoint_7_mps = [409, 915, 1522, 2066, 2523, 2908, 3256, 3572, 3686]
         self.mpsDataPoint_15_mps = [0, 2.00, 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 10.00, 11.00, 13.00, 15.00]
@@ -32,24 +32,24 @@ class DFRobot_FS3000:
 
     def set_range(self, range):
         '''
-        @fn set_range
-        @brief 设置空气流速检测距离
-        @range AIRFLOW_RANGE_7_MPS:FS3000_1005 AIRFLOW_RANGE_15MPS:FS3000_1015
+            @fn set_range
+            @brief Set the airflow detection range.
+            @range AIRFLOW_RANGE_7_MPS: FS3000_1005, AIRFLOW_RANGE_15MPS: FS3000_1015
         '''
         self._range = range
         
         if self._range == AIRFLOW_RANGE_7_MPS:
-            self._mpsDataPoint = list(self.mpsDataPoint_7_mps)#self.mpsDataPoint_7_mps.copy()
-            self._rawDataPoint = list(self.rawDataPoint_7_mps)#self.rawDataPoint_7_mps.copy()
+            self._mpsDataPoint = list(self.mpsDataPoint_7_mps)
+            self._rawDataPoint = list(self.rawDataPoint_7_mps)
         elif self._range == AIRFLOW_RANGE_15_MPS:
-            self._mpsDataPoint = list(self.mpsDataPoint_15_mps)#self.mpsDataPoint_15_mps.copy()
-            self._rawDataPoint = list(self.rawDataPoint_15_mps)#self.rawDataPoint_15_mps.copy()
+            self._mpsDataPoint = list(self.mpsDataPoint_15_mps)
+            self._rawDataPoint = list(self.rawDataPoint_15_mps)
 
     def read_raw(self):
         '''
-        @fn read_raw
-        @brief 获取传感器得原始数据
-        @return FS3000 寄存器原始数据
+            @fn read_raw
+            @brief Get the raw data from the sensor.
+            @return Raw data from the FS3000 register.
         '''
         self.ret = 0
         readBuf = self._read_data()
@@ -59,9 +59,9 @@ class DFRobot_FS3000:
     
     def read_meter_per_sec(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取秒为单位的空气流速
-        @return 空气流速
+            @fn read_meter_per_sec
+            @brief Get the airflow velocity in meters per second (m/s).
+            @return Airflow velocity data.
         '''
         self.data_position = 0
         self.air_flow_raw = self.read_raw()
@@ -85,15 +85,15 @@ class DFRobot_FS3000:
 
         self.air_flow_mps = self._mpsDataPoint[self.data_position] + (self.window_size_mps * self.percentage_of_window)
 
-        return self.air_flow_mps
+        return round(self.air_flow_mps, 2)
     
     def read_mile_per_hour(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取英里/小时为单位的空气流
-        @return 空气流速数
+            @fn read_mile_per_hour
+            @brief Get the airflow velocity in miles per hour (mph).
+            @return Airflow velocity data.
         '''
-        return self.read_meter_per_sec() * 2.2369362912
+        return round((self.read_meter_per_sec() * 2.2369362912), 2)
 
 
     def _check_sum(self,buf):

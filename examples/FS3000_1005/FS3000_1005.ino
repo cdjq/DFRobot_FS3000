@@ -1,11 +1,11 @@
 /*!
  * @file FS3000_1005.ino
- * @brief 这是FS3000_1005空气流速传感器的示例代码.
- * @copyright  Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @license     The MIT License (MIT)
+ * @brief This is the example code for the FS3000_1005 air velocity sensor.
+ * @copyright Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
+ * @license The MIT License (MIT)
  * @author [tangjie](jie.tang@dfrobot.com)
- * @version  V1.0
- * @date  2024-12-2
+ * @version V1.0
+ * @date 2024-12-2
  * @url https://github.com/DFRobot/DFRobot_FS3000
  */
 

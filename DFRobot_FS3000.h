@@ -1,6 +1,6 @@
 /**
  * @file DFRobot_FS3000.h
- * @brief 这是空气流速模块驱动库的构造函数
+ * @brief This is the constructor for the air velocity module driver library.
  * @copyright Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license The MIT License (MIT)
  * @author    [TangJie](jie.tang@dfrobot.com)
@@ -34,15 +34,15 @@ class DFRobot_FS3000
 public:
     /**
      * @fn DFRobot_FS3000
-     * @brief FS3000传感器得构造函数
-     * @param pWire I2C同行对象
+     * @brief Constructor for the FS3000 sensor.
+     * @param pWire I2C bus object.
      * @return NULL
      */
     DFRobot_FS3000(TwoWire *pWire=&Wire);
 
     /**
      * @fn ~DFRobot_FS3000
-     * @brief FS3000传感器得析构函数
+     * @brief Destructor for the FS3000 sensor.
      */
     ~DFRobot_FS3000(void){
         _pWire->end();
@@ -50,30 +50,30 @@ public:
 
     /**
      * @fn setRange
-     * @brief 设置空气流速检测距离
-     * @param range AIRFLOW_RANGE_7_MPS:FS3000_1005 AIRFLOW_RANGE_15MPS:FS3000_1015
-     * @return 1：设置成功， 0：设置失败
+     * @brief Set the airflow detection range.
+     * @param range AIRFLOW_RANGE_7_MPS: FS3000_1005, AIRFLOW_RANGE_15MPS: FS3000_1015
+     * @return 1: Setting successful, 0: Setting failed.
      */
     uint8_t setRange(uint8_t range);
 
     /**
      * @fn readRaw
-     * @brief 获取传感器得原始数据
-     * @return FS3000 寄存器原始数据
+     * @brief Get the raw data from the sensor.
+     * @return Raw data from the FS3000 register.
      */
     uint16_t readRaw(void);
 
     /**
      * @fn readMeterPerSec
-     * @brief 获取米/秒为单位的空气流速
-     * @return 空气流速数据
+     * @brief Get the airflow velocity in meters per second (m/s).
+     * @return Airflow velocity data.
      */
     float readMeterPerSec(void);
 
     /**
      * @fn readMilePerHour
-     * @brief 获取英里/小时为单位的空气流速
-     * @return 空气流速数据
+     * @brief Get the airflow velocity in miles per hour (mph).
+     * @return Airflow velocity data.
      */
     float readMilePerHour(void);
 

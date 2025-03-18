@@ -1,6 +1,6 @@
 /**
  * @file DFRobot_FS3000.h
- * @brief 这是空气流速模模块驱动库的实现
+ * @brief This is the implementation of the air velocity module driver library.
  * @copyright Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license The MIT License (MIT)
  * @author    [TangJie](jie.tang@dfrobot.com)

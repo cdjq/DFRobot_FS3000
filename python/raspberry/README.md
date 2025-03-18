@@ -3,14 +3,14 @@ DFRobot_FS3000
 
 - [中文版](./README_CN.md)
 
-这是一个空气流速传感器的驱动库。
+This is a driver library for an air velocity sensor.
 
-![产品效果图](../../resources/images/SEN0501.png)
-![产品效果图](../../resources/images/SEN0500.png)
+![Product Effect Image](../../resources/images/SEN0501.png)
+![Product Effect Image](../../resources/images/SEN0500.png)
 
 ## Product Link (https://www.dfrobot.com)
 
-    SKU：SEN0500/SEN0501
+    SKU：NULL
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ DFRobot_FS3000
 
 ## Summary
 
-这是一个空气流速传感器的驱动库。
+This is a driver library for an air velocity sensor.
 
 ## Installation
 
@@ -38,30 +38,30 @@ python FS3000.py
 ```python
     def set_range(self, range):
         '''
-        @fn set_range
-        @brief 设置空气流速检测距离
-        @range AIRFLOW_RANGE_7_MPS:FS3000_1005 AIRFLOW_RANGE_15MPS:FS3000_1015
+            @fn set_range
+            @brief Set the airflow detection range.
+            @range AIRFLOW_RANGE_7_MPS: FS3000_1005, AIRFLOW_RANGE_15MPS: FS3000_1015
         '''
 
     def read_raw(self):
         '''
-        @fn read_raw
-        @brief 获取传感器得原始数据
-        @return FS3000 寄存器原始数据
+            @fn read_raw
+            @brief Get the raw data from the sensor.
+            @return Raw data from the FS3000 register.
         '''
     
     def read_meter_per_sec(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取米/秒为单位的空气流速
-        @return 空气流速数据
+            @fn read_meter_per_sec
+            @brief Get the airflow velocity in meters per second (m/s).
+            @return Airflow velocity data.
         '''
     
     def read_mile_per_hour(self):
         '''
-        @fn read_meter_per_sec
-        @brief 获取英里/小时为单位的空气流速
-        @return 空气流速数据
+            @fn read_mile_per_hour
+            @brief Get the airflow velocity in miles per hour (mph).
+            @return Airflow velocity data.
         '''
 ```
 

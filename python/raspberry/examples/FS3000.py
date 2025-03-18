@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 @file FS3000.py
-@brief 这是空气流速传感器的示例代码.
-@copyright  Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
-@license     The MIT License (MIT)
+@brief This is the example code for the air velocity sensor.
+@copyright Copyright (c) 2024 DFRobot Co.Ltd (http://www.dfrobot.com)
+@license The MIT License (MIT)
 @author [tangjie](jie.tang@dfrobot.com)
-@version  V1.0
-@date  2024-12-03
+@version V1.0
+@date 2024-12-03
 @url https://github.com/DFRobot/DFRobot_FS3000
 """
 
@@ -21,9 +21,9 @@ from DFRobot_FS3000 import *
 fs = DFRobot_FS3000()
 
 def setup():
-  #初始化FS3000_1005
+  # Initialize FS3000_1005
   fs.set_range(AIRFLOW_RANGE_7_MPS)
-  #屏蔽上面代码，释放下面代码，初始化FS3000_1015
+  # Comment out the above code, uncomment the below code to initialize FS3000_1015
   #fs.set_range(AIRFLOW_RANGE_15_MPS)
   
 
