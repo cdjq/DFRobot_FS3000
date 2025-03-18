@@ -67,14 +67,14 @@ DFRobot_FS3000
 
 MCU                | SoftwareSerial | HardwareSerial |      IIC      |
 ------------------ | :----------: | :----------: | :----------: | 
-Arduino Uno        |      √       |      X       |      √       |
-Mega2560           |      √       |      √       |      √       |
-Leonardo           |      √       |      √       |      √       |
-ESP32              |      X       |      √       |      √       |
-ESP8266            |      √       |      X       |      √       |
+Arduino Uno        |      X       |      X       |      √       |
+Mega2560           |      X       |      X       |      √       |
+Leonardo           |      X       |      X       |      √       |
+ESP32              |      X       |      X       |      √       |
+ESP8266            |      X       |      X       |      √       |
 micro:bit          |      X       |      X       |      √       |
-FireBeetle M0      |      X       |      √       |      X        |
-raspberry          |      X       |      √       |      √       |
+FireBeetle M0      |      X       |      X       |      √       |
+raspberry          |      X       |      X       |      √       |
 
 ## 历史
 - 2024-12-05 - 1.0.0 版本

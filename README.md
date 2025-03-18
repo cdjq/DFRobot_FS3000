@@ -66,14 +66,14 @@ To use this library, first download the library file, paste it into the \Arduino
 
 MCU                | SoftwareSerial | HardwareSerial |      IIC      |
 ------------------ | :----------: | :----------: | :----------: | 
-Arduino Uno        |      √       |      X       |      √       |
-Mega2560           |      √       |      √       |      √       |
-Leonardo           |      √       |      √       |      √       |
-ESP32              |      X       |      √       |      √       |
-ESP8266            |      √       |      X       |      √       |
+Arduino Uno        |      X       |      X       |      √       |
+Mega2560           |      X       |      X       |      √       |
+Leonardo           |      X       |      X       |      √       |
+ESP32              |      X       |      X       |      √       |
+ESP8266            |      X       |      X       |      √       |
 micro:bit          |      X       |      X       |      √       |
-FireBeetle M0      |      X       |      √       |      √       |
-Raspberry Pi       |      X       |      √       |      √       |
+FireBeetle M0      |      X       |      X       |      √       |
+Raspberry Pi       |      X       |      X       |      √       |
 
 ## History
 
