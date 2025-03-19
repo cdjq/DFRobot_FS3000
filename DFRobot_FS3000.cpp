@@ -10,7 +10,6 @@
  */
 
 #include "DFRobot_FS3000.h"
-static float _airflowMps = 0.0;
 static uint8_t _range = 0;
 
 DFRobot_FS3000::DFRobot_FS3000(TwoWire *pWire):_pWire(pWire){}
@@ -25,7 +24,7 @@ uint8_t DFRobot_FS3000::setRange(uint8_t range)
     int rawDataPoint_15_mps[13] =  {409, 1203, 1597, 1908, 2187, 2400, 2629, 2801, 3006, 3178, 3309, 3563, 3686}; // FS3000-1015 datapoints
 
     _pWire->begin();
-    _pWire->beginTransmission(FS3000_ADDR);
+    _pWire->beginTransmission(_addr);
 
     if(_pWire->endTransmission() != 0){
         return 0;
@@ -40,11 +39,11 @@ uint8_t DFRobot_FS3000::setRange(uint8_t range)
     if(_range == AIRFLOW_RANGE_15_MPS)
     {
         memcpy(_mpsDataPoint,mpsDataPoint_15_mps,sizeof(float) * _range);
-        memcpy(_rawDataPoint,rawDataPoint_15_mps,sizeof(float) * _range);
+        memcpy(_rawDataPoint,rawDataPoint_15_mps,sizeof(int) * _range);
     }
 
     return 1;
-}
+} 
 
 
 uint16_t DFRobot_FS3000::readRaw(void)
@@ -85,7 +84,7 @@ float DFRobot_FS3000::readMeterPerSec(void)
 
     for( int i = 0 ; i < _range ; i++) 
     {
-        if (airflowRaw > _rawDataPoint[i])
+        if (airflowRaw > (uint16_t)_rawDataPoint[i])
         {
           data_position = i;
         }
@@ -109,7 +108,7 @@ float DFRobot_FS3000::readMilePerHour(void)
 uint8_t DFRobot_FS3000::readData(void* buf,  uint8_t len)
 {
     uint8_t *_buf = (uint8_t*)buf;
-    uint8_t ret = _pWire->requestFrom(FS3000_ADDR, len);
+    uint8_t ret = _pWire->requestFrom(_addr, len);
 
     for(uint8_t i = 0; i < len; i++)
     {

@@ -18,7 +18,6 @@
 #include "stdlib.h"
 #include "string.h"
 
-#define FS3000_ADDR 0x28
 #define AIRFLOW_RANGE_7_MPS 0x09
 #define AIRFLOW_RANGE_15_MPS 0x0D
 
@@ -85,6 +84,7 @@ private:
     bool checkSum(void* buf);
     float _mpsDataPoint[13]; 
     int _rawDataPoint[13]; 
+    uint8_t _addr = 0x28;
 
 
 };
